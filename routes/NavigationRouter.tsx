@@ -7,8 +7,8 @@ import CategoryScreen from "../screens/CategoryScreen";
 import MealsInfo from "../screens/MealsInfo";
 
 export type rootStackParams = {
-  Meals: any;
-  MealsInfo: any;
+  Meals: undefined;
+  MealsInfo: { catID: string[] };
 };
 
 const Stack = createNativeStackNavigator<rootStackParams>();

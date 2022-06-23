@@ -7,23 +7,24 @@ import { useNavigation } from "@react-navigation/native";
 //TYPESCRIPT
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { rootStackParams } from "../routes/NavigationRouter";
-interface items {
+
+interface Item {
   color: string;
   title: string;
-  id: string;
+  id: string[];
 }
-interface itemProp {
-  item: items[];
-}
+
 
 const CategoryScreen = () => {
   //a function inside other
   const navigation =
     useNavigation<NativeStackNavigationProp<rootStackParams>>();
   const RenderCategory = (itemData: any) => {
-    const { title, color, id } = itemData.item;
+    const { title, color, id } = itemData.item as Item;
     const onPress = () => {
-      navigation.navigate("MealsInfo");
+      navigation.navigate("MealsInfo", {
+        catID: id
+      });
     };
     return <CategoryGrid title={title} color={color} onPress={onPress} />;
   };
