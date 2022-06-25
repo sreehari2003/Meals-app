@@ -1,10 +1,12 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { MEALS } from "../data/dummey";
+import { FlatList, StyleSheet, View } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { MEALS, CATEGORIES } from "../data/dummey";
 //Typescript
-import { useRoute, RouteProp } from "@react-navigation/native";
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { rootStackParams } from "../routes/NavigationRouter";
 import MealItem from "../components/MealItem";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 
 type MealsInfoRoutes = RouteProp<rootStackParams, "MealsInfo">
 
@@ -18,7 +20,21 @@ export type rendeMeal = {
 
 const MealsInfo: React.FC = () => {
     const route = useRoute<MealsInfoRoutes>();
+    const navigation = useNavigation<NativeStackNavigationProp<rootStackParams>>();
+
     const { catID } = route.params;
+
+    //here i am dynamically setting the page title
+    useLayoutEffect(() => {
+        const catTitle = CATEGORIES.find((cat) => cat.id == catID)?.title;
+        navigation.setOptions({
+            title: catTitle
+        })
+    }, [navigation, catID]);
+
+
+
+
     const displayedMeals = MEALS.filter((el) => {
         return el.categoryIds.indexOf(catID) >= 0;
     })
