@@ -5,18 +5,20 @@ import { rendeMeal } from '../screens/MealsInfo'
 const MealItem = ({ title, imageUrl, durablity, affordability, complexity }: rendeMeal) => {
     return (
         <View style={styles.container}>
-            <Pressable style={[styles.wrapper, styles.shadow]}>
-                <View >
-                    <Image source={{ uri: imageUrl }} style={styles.image} />
-                    <Text style={styles.title}>{title}</Text>
-                </View>
+            <View style={[styles.wrapper, styles.shadow]}>
+                <Pressable android_ripple={{ color: "black" }} style={({ pressed }) => pressed ? styles.ripple : null}>
+                    <View >
+                        <Image source={{ uri: imageUrl }} style={styles.image} />
+                        <Text style={styles.title}>{title}</Text>
+                    </View>
 
-                <View style={styles.details}>
-                    <Text style={styles.detailsText}>{durablity}</Text>
-                    <Text style={styles.detailsText}>{affordability}</Text>
-                    <Text style={styles.detailsText}>{complexity}</Text>
-                </View>
-            </Pressable>
+                    <View style={styles.details}>
+                        <Text style={styles.detailsText}>{durablity}</Text>
+                        <Text style={styles.detailsText}>{affordability}</Text>
+                        <Text style={styles.detailsText}>{complexity}</Text>
+                    </View>
+                </Pressable>
+            </View>
         </View>
     )
 }
@@ -25,7 +27,9 @@ export default MealItem
 
 const styles = StyleSheet.create({
     container: {
-        padding: 25
+        padding: 25,
+        overflow: "hidden",
+        flex: 1,
     },
     image: {
         height: 200,
@@ -35,6 +39,7 @@ const styles = StyleSheet.create({
     wrapper: {
         borderRadius: 16,
         overflow: "hidden",
+        backgroundColor: "white"
     },
     title: {
         textAlign: "center",
@@ -57,5 +62,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 6,
         elevation: 4
-    }
+    },
+    ripple: {
+        opacity: 0.7,
+    },
 })
