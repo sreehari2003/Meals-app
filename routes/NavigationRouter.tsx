@@ -6,10 +6,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //SCREENS
 import CategoryScreen from "../screens/CategoryScreen";
 import MealsInfo from "../screens/MealsInfo";
+import Recipe from "../screens/Recipe";
 
 export type rootStackParams = {
   Meals: undefined;
   MealsInfo: { catID: string[] };
+  RecipieInfo: { mealID: string, title: string };
 };
 
 const Stack = createNativeStackNavigator<rootStackParams>();
@@ -33,6 +35,7 @@ const NavigationRouter = () => {
             title: "All categories",
           }} />
           <Stack.Screen name="MealsInfo" component={MealsInfo} />
+          <Stack.Screen name="RecipieInfo" component={Recipe} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

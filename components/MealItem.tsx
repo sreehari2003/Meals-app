@@ -1,12 +1,26 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { rendeMeal } from '../screens/MealsInfo'
+import { useNavigation } from '@react-navigation/native';
+import { rootStackParams } from '../routes/NavigationRouter';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const MealItem = ({ title, imageUrl, durablity, affordability, complexity }: rendeMeal) => {
+
+const MealItem = ({ title, imageUrl, durablity, affordability, complexity, id }: rendeMeal) => {
+    const navigation = useNavigation<NativeStackNavigationProp<rootStackParams>>();
+
+
+    const changeScreen = () => {
+        navigation.navigate("RecipieInfo", {
+            mealID: id,
+            title: title,
+        });
+    }
+
     return (
         <View style={styles.container}>
             <View style={[styles.wrapper, styles.shadow]}>
-                <Pressable android_ripple={{ color: "black" }} style={({ pressed }) => pressed ? styles.ripple : null}>
+                <Pressable android_ripple={{ color: "black" }} style={({ pressed }) => pressed ? styles.ripple : null} onPress={changeScreen}>
                     <View >
                         <Image source={{ uri: imageUrl }} style={styles.image} />
                         <Text style={styles.title}>{title}</Text>

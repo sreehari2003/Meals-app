@@ -16,6 +16,7 @@ export type rendeMeal = {
     durablity: string;
     affordability: string;
     complexity: string;
+    id: string;
 }
 
 const MealsInfo: React.FC = () => {
@@ -41,6 +42,7 @@ const MealsInfo: React.FC = () => {
     const RenderMealItem = (props: any) => {
         const item = props.item;
         const prop = {
+            id: item.id,
             title: item.title,
             imageUrl: item.imageUrl,
             durablity: item.duration,
